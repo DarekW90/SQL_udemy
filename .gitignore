@@ -1,0 +1,4 @@
+# there is no need to send to git all this modules
+node_modules/
+package-lock.json
+package.json
