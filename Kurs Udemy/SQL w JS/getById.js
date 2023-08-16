@@ -45,3 +45,13 @@ const userDb = await insertOne({
 
 
 console.log(userDb);
+
+async function getById(id){
+    const query = "SELECT * FROM users WHERE id = ?";
+    const [data] = await connection.query(query, [id]);
+
+    return data.pop();
+}
+
+// console.log( await getById(1));
+

@@ -34,7 +34,7 @@ async function insertOne (user) {
     return { ...user, id: result.insertId };
 }
 
-
+/*
 const userDb = await insertOne({
     name: "Alina",
     surname:"Kowalska",
@@ -42,6 +42,51 @@ const userDb = await insertOne({
     bio:"Programistka",
     address: "Wilcza 111, Wawa"
 });
+*/
+//console.log(userDb);
+
+async function getById(id){
+    const query = "SELECT * FROM users WHERE id = ?";
+    const [data] = await connection.query(query, [id]);
+
+    return data.pop();
+}
+
+// console.log( await getById(1));
 
 
-console.log(userDb);
+async function update(user) {
+    if (! user.id) return null;
+
+    const query = `
+        UPDATE users SET name = ?,
+        surname = ?
+        WHERE id = ?
+    `;
+
+    await connection.query(
+        query,
+        [user.name, user.surname, user.id]
+    );
+
+    return user;
+}
+
+console.log (await getById(10));
+
+await update({
+    id: 10,
+    name: "Karol",
+    surname: "Karolski"
+});
+
+console.log (await getById(10));
+
+
+async function removeById(id) {
+    const query = "DELETE FROM users WHERE id = ?";
+    await connection.query(query, [id]);
+    return;
+}
+
+await removeById(15);
