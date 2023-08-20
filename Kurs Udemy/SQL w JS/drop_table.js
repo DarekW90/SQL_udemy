@@ -4,7 +4,7 @@ const connection = await mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "test_db"
+    database: "test"
 });
 
 await connection.connect();
@@ -18,5 +18,5 @@ async function dropTable(name) {
     });
 }
 
-await dropTable("customers");
+await dropTable("webshopcustomers");
 console.log ("Table deleted");
